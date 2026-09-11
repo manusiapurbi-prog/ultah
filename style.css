@@ -1,0 +1,462 @@
+/* ==========================================================================
+   RESET & BASE VARIABLES
+   ========================================================================== */
+:root {
+  --bg-color: #0f172a;        /* slate-900 */
+  --card-bg: rgba(30, 41, 59, 0.75); /* slate-800 with transparency */
+  --border-color: rgba(148, 163, 184, 0.2);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-blue: #38bdf8;
+  --accent-purple: #818cf8;
+  --success-color: #4ade80;
+  --error-color: #f87171;
+  --gold-1: #fef08a;
+  --gold-2: #fbbf24;
+  --gold-3: #d97706;
+  --gold-dark: #78350f;
+  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.08) 0%, transparent 40%);
+  color: var(--text-main);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  padding: 16px;
+}
+
+#app {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* ==========================================================================
+   PROGRESS BAR
+   ========================================================================== */
+#progress-container {
+  width: 100%;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(51, 65, 85, 0.6);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+#progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #4ade80);
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.5);
+}
+
+#progress-text {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-align: right;
+}
+
+/* ==========================================================================
+   VAULT CARD (BABAK 1 & 2)
+   ========================================================================== */
+#vault-card {
+  width: 100%;
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 36px 24px;
+  text-align: center;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(255, 255, 255, 0.05);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vault-icon-wrapper {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vault-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(248, 113, 113, 0.3) 0%, transparent 70%);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.vault-icon {
+  font-size: 2.2rem;
+  z-index: 1;
+}
+
+#vault-title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #f87171;
+  margin-bottom: 6px;
+}
+
+#vault-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+/* Puzzle Sections */
+.puzzle-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.puzzle-question {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  font-family: inherit;
+  color: #fff;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1.5px solid rgba(148, 163, 184, 0.25);
+  border-radius: 12px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.input-group input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
+}
+
+.input-group input::placeholder {
+  color: #64748b;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #ffffff;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+.feedback {
+  min-height: 24px;
+  font-size: 0.925rem;
+  font-weight: 600;
+  transition: opacity 0.3s ease;
+}
+
+.feedback.success {
+  color: var(--success-color);
+}
+
+.feedback.error {
+  color: var(--error-color);
+}
+
+/* ==========================================================================
+   ENVELOPE & GOLDEN TICKET (BABAK 3)
+   ========================================================================== */
+#envelope-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Amplop */
+.envelope-card {
+  width: 260px;
+  height: 180px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 16px 36px rgba(245, 158, 11, 0.35),
+              0 0 0 2px rgba(254, 240, 138, 0.4);
+  animation: float 2.6s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.envelope-card:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 24px 44px rgba(245, 158, 11, 0.5),
+              0 0 0 3px rgba(254, 240, 138, 0.7);
+}
+
+.envelope-seal {
+  font-size: 2.8rem;
+  margin-bottom: 4px;
+}
+
+.envelope-ribbon {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #78350f;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 3px 12px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.envelope-cta {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Tiket Emas */
+.ticket-card {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 20%, #fde68a 50%, #fbbf24 100%);
+  border: 2px solid #fef08a;
+  border-radius: 20px;
+  padding: 36px 24px;
+  text-align: center;
+  color: #451a03;
+  box-shadow: 0 20px 50px rgba(251, 191, 36, 0.35),
+              0 0 0 1px rgba(217, 119, 6, 0.2);
+  overflow: hidden;
+}
+
+.ticket-notch {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.notch-left {
+  left: -14px;
+  box-shadow: inset -2px 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.notch-right {
+  right: -14px;
+  box-shadow: inset 2px 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.ticket-header {
+  margin-bottom: 20px;
+}
+
+.ticket-sparkle {
+  display: block;
+  font-size: 0.9rem;
+  letter-spacing: 6px;
+  color: #b45309;
+  margin-bottom: 6px;
+}
+
+.ticket-header h2 {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #78350f;
+  margin-bottom: 4px;
+}
+
+.ticket-sub {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #92400e;
+}
+
+.ticket-body {
+  border-top: 1.5px dashed rgba(180, 83, 9, 0.35);
+  border-bottom: 1.5px dashed rgba(180, 83, 9, 0.35);
+  padding: 24px 8px;
+  margin-bottom: 24px;
+}
+
+.ticket-message {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #78350f;
+}
+
+.ticket-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-golden {
+  width: 100%;
+  padding: 16px 28px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fef08a;
+  background: #0f172a;
+  border: 2px solid #fbbf24;
+  border-radius: 14px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.5);
+}
+
+.btn-golden:hover {
+  background: #fbbf24;
+  color: #0f172a;
+  border-color: #f59e0b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.5);
+}
+
+.btn-golden:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   ANIMATIONS & UTILITIES
+   ========================================================================== */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.fade-out {
+  animation: fadeOut 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.94); }
+}
+
+.fade-in {
+  animation: fadeIn 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-9px); }
+  40% { transform: translateX(9px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+/* ==========================================================================
+   RESPONSIVE (HP & SCREEN ADJUSTMENTS)
+   ========================================================================== */
+@media (max-width: 380px) {
+  #app {
+    padding: 12px 6px;
+  }
+  #vault-card {
+    padding: 28px 18px;
+  }
+  #vault-title {
+    font-size: 1.35rem;
+  }
+  .ticket-card {
+    padding: 28px 18px;
+  }
+  .ticket-header h2 {
+    font-size: 1.4rem;
+  }
+  .ticket-message {
+    font-size: 1rem;
+  }
+}

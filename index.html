@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spesial Untukmu ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Container utama -->
+  <main id="app">
+
+    <!-- Progress Bar (terlihat di babak teka-teki) -->
+    <div id="progress-container">
+      <div class="progress-track">
+        <div id="progress-bar"></div>
+      </div>
+      <span id="progress-text">0 / 2</span>
+    </div>
+
+    <!-- ========== BABAK 1 & 2: Card Brankas ========== -->
+    <section id="vault-card" aria-label="Brankas Digital">
+      <div class="vault-icon-wrapper">
+        <div class="vault-glow"></div>
+        <span class="vault-icon">🔒</span>
+      </div>
+      <h1 id="vault-title">Akses Ditolak</h1>
+      <p id="vault-subtitle">Buktikan Identitasmu!</p>
+
+      <!-- Teka-teki 1 -->
+      <div id="puzzle-1" class="puzzle-section">
+        <label for="answer-1" class="puzzle-question">Apa nama panggilan konyolmu dari aku?</label>
+        <div class="input-group">
+          <input 
+            type="text" 
+            id="answer-1" 
+            placeholder="Ketik jawabanmu..." 
+            autocomplete="off" 
+            autofocus 
+          />
+        </div>
+        <button id="submit-1" class="btn-submit" type="button">Cek Jawaban</button>
+        <p id="feedback-1" class="feedback" aria-live="polite"></p>
+      </div>
+
+      <!-- Teka-teki 2 (hidden di awal) -->
+      <div id="puzzle-2" class="puzzle-section" style="display: none;">
+        <label for="answer-2" class="puzzle-question">Masukkan Kode Rahasia Hari Ini!</label>
+        <div class="input-group">
+          <input 
+            type="text" 
+            id="answer-2" 
+            placeholder="Masukkan kode..." 
+            inputmode="numeric" 
+            pattern="[0-9]*" 
+            autocomplete="off" 
+          />
+        </div>
+        <button id="submit-2" class="btn-submit" type="button">Cek Kode</button>
+        <p id="feedback-2" class="feedback" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ========== BABAK 3: Amplop & Tiket Emas ========== -->
+    <section id="envelope-section" style="display: none;" aria-label="Tiket Emas Hadiah">
+      <!-- Amplop (sebelum dibuka) -->
+      <div id="envelope" class="envelope-card" role="button" tabindex="0" aria-label="Buka Amplop Emas">
+        <div class="envelope-seal">💌</div>
+        <div class="envelope-ribbon">VIP INVITATION</div>
+        <p class="envelope-cta">Klik untuk membuka ✨</p>
+      </div>
+
+      <!-- Tiket Emas (terbuka) -->
+      <div id="golden-ticket" class="ticket-card" style="display: none;">
+        <div class="ticket-notch notch-left"></div>
+        <div class="ticket-notch notch-right"></div>
+        <div class="ticket-header">
+          <span class="ticket-sparkle">✦ ✦ ✦</span>
+          <h2>TIKET VIP EMAS</h2>
+          <span class="ticket-sub">EXCLUSIVE INVITATION</span>
+        </div>
+        <div class="ticket-body">
+          <p class="ticket-message">
+            "Harta karun utamanya adalah dirimu.<br/>
+            Kamu diundang ke Malam Penghargaan!"
+          </p>
+        </div>
+        <div class="ticket-footer">
+          <button id="btn-use-ticket" class="btn-golden" type="button">
+            Gunakan Tiket ✨
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

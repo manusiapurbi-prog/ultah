@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
   <!-- Container utama -->
@@ -95,6 +96,111 @@
         </div>
       </div>
     </section>
+
+    <!-- ========== BABAK 4: Karpet Merah ========== -->
+    <section id="red-carpet" style="display: none;" aria-label="Malam Penghargaan">
+      <div class="spotlight left"></div>
+      <div class="spotlight right"></div>
+      <div class="award-header fade-in-child">
+        <p class="award-label">✦ MALAM PENGHARGAAN TAHUNAN ✦</p>
+        <!-- Catatan: Ganti Sayang dan 22 dengan Nama dan Umur asli bila diperlukan -->
+        <h1 id="award-title" class="award-title">
+          Sayang<br/>ke-22
+        </h1>
+        <p class="award-sub">Satu tahun lagi penuh kenangan bersama.</p>
+      </div>
+
+      <!-- Tombol lanjut ke galeri trofi -->
+      <button id="btn-to-gallery" class="btn-luxury" type="button">
+        Lihat Penghargaanmu 🏆
+      </button>
+    </section>
+
+    <!-- ========== BABAK 5: Galeri Trofi Interaktif ========== -->
+    <section id="trophy-gallery" style="display: none;" aria-label="Galeri Trofi">
+      <h2 class="gallery-title">🏅 Daftar Penghargaanmu</h2>
+      <p class="gallery-sub">Klik setiap trofi untuk membuka pesannya!</p>
+
+      <div class="trophy-grid">
+
+        <!-- Trofi 1 -->
+        <button class="trophy-card" id="trophy-1"
+          aria-label="Buka trofi Teman Ngobrol Terbaik"
+          data-trophy-id="1" type="button">
+          <span class="trophy-icon">🗣️</span>
+          <span class="trophy-name">Teman Ngobrol<br/>Terbaik</span>
+          <span class="trophy-badge">🥇</span>
+        </button>
+
+        <!-- Trofi 2 -->
+        <button class="trophy-card" id="trophy-2"
+          aria-label="Buka trofi Senyum Paling Bikin Salting"
+          data-trophy-id="2" type="button">
+          <span class="trophy-icon">😊</span>
+          <span class="trophy-name">Senyum Paling<br/>Bikin Salting</span>
+          <span class="trophy-badge">🥇</span>
+        </button>
+
+        <!-- Trofi 3 -->
+        <button class="trophy-card" id="trophy-3"
+          aria-label="Buka trofi Orang Paling Sabar"
+          data-trophy-id="3" type="button">
+          <span class="trophy-icon">🧘</span>
+          <span class="trophy-name">Orang Paling<br/>Sabar</span>
+          <span class="trophy-badge">🥇</span>
+        </button>
+
+      </div>
+
+      <!-- Trofi Utama -->
+      <div class="main-trophy-wrapper">
+        <button class="trophy-main" id="trophy-main"
+          aria-label="Buka trofi utama Best Person of My Year" type="button">
+          <div class="main-trophy-glow"></div>
+          <span class="main-trophy-icon">🏆</span>
+          <span class="main-trophy-label">Best Person<br/>of My Year</span>
+          <span class="main-trophy-cta">✨ Klik untuk membuka ✨</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========== MODAL: Trofi Mini ========== -->
+    <div id="modal-overlay" class="modal-overlay" style="display: none;" role="dialog" aria-modal="true">
+      <div id="modal-box" class="modal-box">
+        <button id="modal-close" class="modal-close" aria-label="Tutup modal">✕</button>
+        <div id="modal-content"></div>
+      </div>
+    </div>
+
+    <!-- ========== MODAL: Trofi Utama (Babak 6) ========== -->
+    <div id="modal-main-overlay" class="modal-overlay modal-main-overlay" style="display: none;" role="dialog" aria-modal="true">
+      <div id="modal-main-box" class="modal-box modal-main-box">
+        <button id="modal-main-close" class="modal-close" aria-label="Tutup modal utama">✕</button>
+        <div class="modal-main-content">
+          <div class="main-letter-header">
+            <span class="letter-sparkle">✦ ✦ ✦</span>
+            <h2>Selamat Ulang Tahun! 🎂</h2>
+          </div>
+          <div class="letter-body">
+            <p class="letter-text">
+              <!-- Pesan surat ulang tahun personal -->
+              Dear Sayang,<br/><br/>
+              Setahun lagi kamu sudah berhasil menjadi versi terbaik dari dirimu sendiri.
+              Setiap hari bersamamu adalah hadiah yang tidak ternilai.<br/><br/>
+              Semoga di usia yang baru ini, kamu terus bersinar, terus tertawa, dan terus bikin aku salting dengan senyummu. 😊<br/><br/>
+              Terima kasih sudah ada. Terima kasih sudah menjadi kamu.<br/><br/>
+              Dengan sepenuh hati,<br/>
+              <em>— Aku 💛</em>
+            </p>
+          </div>
+          <div class="letter-footer">
+            <button id="btn-claim-gift" class="btn-claim" type="button">
+              🎁 Klaim Hadiah Nyatamu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </main>
 

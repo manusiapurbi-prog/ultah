@@ -460,3 +460,435 @@ body {
     font-size: 1rem;
   }
 }
+
+/* ==========================================================================
+   BABAK 4: RED CARPET
+   ========================================================================== */
+#red-carpet {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background tema luxury diatur di body saat babak 4 aktif */
+body.luxury-mode {
+  background-color: #1a0a00;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(180, 40, 40, 0.25) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(180, 130, 0, 0.15) 0%, transparent 50%);
+}
+
+/* Spotlight kiri dan kanan */
+.spotlight {
+  position: fixed;
+  top: -40%;
+  width: 200px;
+  height: 140vh;
+  background: linear-gradient(to bottom, rgba(255, 220, 100, 0.12), transparent);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+}
+.spotlight.left {
+  left: -60px;
+  transform: rotate(-15deg);
+  transform-origin: top center;
+  animation: spotlightSwing 5s ease-in-out infinite alternate;
+}
+.spotlight.right {
+  right: -60px;
+  transform: rotate(15deg);
+  transform-origin: top center;
+  animation: spotlightSwing 5s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes spotlightSwing {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(12deg); }
+}
+
+.award-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 40px;
+}
+
+.award-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #b45309;
+  margin-bottom: 12px;
+}
+
+.award-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  background: linear-gradient(135deg, #fef08a 0%, #f59e0b 40%, #fde68a 70%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+  text-shadow: none;
+}
+
+.award-sub {
+  font-size: 1rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Tombol luxury */
+.btn-luxury {
+  position: relative;
+  z-index: 1;
+  padding: 16px 36px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #0f172a;
+  background: linear-gradient(135deg, #fef08a 0%, #fbbf24 50%, #d97706 100%);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(251, 191, 36, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  letter-spacing: 0.5px;
+}
+.btn-luxury:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(251, 191, 36, 0.65);
+}
+.btn-luxury:active { transform: translateY(0); }
+
+/* ==========================================================================
+   BABAK 5: GALERI TROFI
+   ========================================================================== */
+#trophy-gallery {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0 30px;
+}
+
+.gallery-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fef08a, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+}
+
+.gallery-sub {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+/* Grid trofi mini (3 card sejajar) */
+.trophy-grid {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+.trophy-card {
+  flex: 1;
+  min-width: 0;
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(251, 191, 36, 0.2);
+  border-radius: 18px;
+  padding: 18px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+
+.trophy-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(251, 191, 36, 0.7);
+  box-shadow: 0 12px 30px rgba(251, 191, 36, 0.2);
+}
+
+.trophy-icon {
+  font-size: 2rem;
+  display: block;
+}
+
+.trophy-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.trophy-badge {
+  font-size: 1rem;
+}
+
+/* Efek pop saat diklik */
+.trophy-card.popped {
+  animation: cardPop 0.3s ease;
+}
+@keyframes cardPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* ==========================================================================
+   TROFI UTAMA (BABAK 6)
+   ========================================================================== */
+.main-trophy-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.trophy-main {
+  position: relative;
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.9));
+  border: 2px solid rgba(251, 191, 36, 0.5);
+  border-radius: 24px;
+  padding: 32px 40px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  overflow: hidden;
+}
+
+.trophy-main:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(251, 191, 36, 0.35);
+}
+
+.main-trophy-glow {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.25) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: glowPulse 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.25); }
+}
+
+.main-trophy-icon {
+  font-size: 3.6rem;
+  display: block;
+  filter: drop-shadow(0 0 16px rgba(251, 191, 36, 0.8));
+  animation: trophyFloat 2.8s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes trophyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.main-trophy-label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fef08a, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.3;
+  z-index: 1;
+}
+
+.main-trophy-cta {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  z-index: 1;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   MODAL
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-box {
+  background: rgba(15, 23, 42, 0.97);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 20px;
+  padding: 28px 24px;
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+  animation: modalIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: rgba(51, 65, 85, 0.6);
+  border: none;
+  color: #94a3b8;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.modal-close:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+/* Modal Trofi Utama */
+.modal-main-box {
+  background: linear-gradient(145deg, #1a0a00 0%, #1e1008 100%);
+  border-color: rgba(251, 191, 36, 0.35);
+  max-width: 400px;
+}
+
+.main-letter-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.letter-sparkle {
+  display: block;
+  font-size: 0.85rem;
+  letter-spacing: 6px;
+  color: #b45309;
+  margin-bottom: 8px;
+}
+
+.main-letter-header h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fef08a, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.letter-body {
+  border-top: 1px dashed rgba(180, 83, 9, 0.3);
+  border-bottom: 1px dashed rgba(180, 83, 9, 0.3);
+  padding: 20px 4px;
+  margin-bottom: 24px;
+}
+
+.letter-text {
+  font-size: 0.975rem;
+  line-height: 1.75;
+  color: #e2e8f0;
+  text-align: left;
+}
+
+.letter-footer {
+  display: flex;
+  justify-content: center;
+}
+
+/* Tombol Klaim Hadiah */
+.btn-claim {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #0f172a;
+  background: linear-gradient(135deg, #fef08a, #fbbf24, #d97706);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  letter-spacing: 0.3px;
+}
+.btn-claim:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(251, 191, 36, 0.65);
+}
+.btn-claim:active { transform: translateY(0); }
+
+/* Konten modal trofi mini */
+.mini-trophy-modal {
+  text-align: center;
+}
+.mini-trophy-modal .modal-trophy-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 12px;
+}
+.mini-trophy-modal h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  color: #fbbf24;
+  margin-bottom: 10px;
+}
+.mini-trophy-modal p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #cbd5e1;
+}
+/* Foto optional */
+.mini-trophy-modal .trophy-photo {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+
+/* ==========================================================================
+   ANIMASI TAMBAHAN
+   ========================================================================== */
+.fade-in-child {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Staggered delay untuk trophy card */
+.trophy-card:nth-child(1) { animation-delay: 0.05s; }
+.trophy-card:nth-child(2) { animation-delay: 0.15s; }
+.trophy-card:nth-child(3) { animation-delay: 0.25s; }
+

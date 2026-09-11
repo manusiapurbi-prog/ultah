@@ -16,6 +16,26 @@ const CONFIG = {
   timing: {
     transitionDelay: 1200, // delay sebelum transisi ke babak berikutnya (ms)
     animDuration: 550      // durasi fade-out / fade-in (ms)
+  },
+  // Konten data 3 trofi mini Babak 5
+  trophies: {
+    1: {
+      icon: '🗣️',
+      title: 'Teman Ngobrol Terbaik',
+      // photo: 'foto1.jpg', // Uncomment jika ada file foto
+      message: 'Ngobrol sama kamu itu gak pernah ada habisnya. Dari hal receh sampai hal serius, kamu selalu dengerin dengan sabar. Makasih ya udah jadi tempat cerita yang paling nyaman! 💬'
+    },
+    2: {
+      icon: '😊',
+      title: 'Senyum Paling Bikin Salting',
+      // photo: 'foto2.jpg', // Uncomment jika ada file foto
+      message: 'Sumpah, senyummu itu harusnya masuk daftar senjata terlarang. Tiap kamu senyum, semua logikaku langsung ilang. Jangan pernah berhenti senyum ya! 😅✨'
+    },
+    3: {
+      icon: '🧘',
+      title: 'Orang Paling Sabar',
+      message: 'Bisa sabar ngadepin aku yang kayak gini itu udah butuh level kesabaran setara biksu. Kamu dapet penghargaan ini karena kamu emang pantas! Makasih ya sayang 🙏😂'
+    }
   }
 };
 
@@ -173,14 +193,150 @@ function openEnvelope() {
 }
 
 // ==========================================================================
-// BABAK 3: GUNAKAN TIKET (TRANSISI BABAK 4)
+// BABAK 4: GUNAKAN TIKET → KARPET MERAH
 // ==========================================================================
 function useTicket() {
-  console.log('Tiket digunakan! Memicu transisi ke Babak 4...');
-  alert('🎉 Tiket VIP Terverifikasi!\nSelamat! Kamu akan diarahkan ke Malam Penghargaan...');
+  const envelopeSection = document.getElementById('envelope-section');
+  const redCarpet = document.getElementById('red-carpet');
 
-  // Hook untuk Babak 4 kelak
-  // e.g., window.dispatchEvent(new CustomEvent('gatePassed'));
+  envelopeSection.classList.add('fade-out');
+  document.body.classList.add('luxury-mode');
+
+  setTimeout(() => {
+    envelopeSection.style.display = 'none';
+    redCarpet.style.display = 'block';
+    redCarpet.classList.add('fade-in');
+  }, 500);
+}
+
+// ==========================================================================
+// BABAK 5: TRANSISI KE GALERI TROFI
+// ==========================================================================
+function transitionToGallery() {
+  const redCarpet = document.getElementById('red-carpet');
+  const trophyGallery = document.getElementById('trophy-gallery');
+
+  redCarpet.classList.add('fade-out');
+
+  setTimeout(() => {
+    redCarpet.style.display = 'none';
+    trophyGallery.style.display = 'block';
+    trophyGallery.classList.add('fade-in');
+
+    // Animasi masuk staggered untuk trophy card
+    const cards = trophyGallery.querySelectorAll('.trophy-card');
+    cards.forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 100 + i * 120);
+    });
+  }, 500);
+}
+
+// ==========================================================================
+// BABAK 5: BUKA MODAL TROFI MINI
+// ==========================================================================
+function openTrophyModal(trophyId) {
+  const data = CONFIG.trophies[trophyId];
+  if (!data) return;
+
+  const overlay = document.getElementById('modal-overlay');
+  const content = document.getElementById('modal-content');
+
+  // Buat HTML konten modal
+  const photoHTML = data.photo
+    ? `<img src="${data.photo}" alt="${data.title}" class="trophy-photo" />`
+    : '';
+
+  content.innerHTML = `
+    <div class="mini-trophy-modal">
+      ${photoHTML}
+      <span class="modal-trophy-icon">${data.icon}</span>
+      <h3>🏅 ${data.title}</h3>
+      <p>${data.message}</p>
+    </div>
+  `;
+
+  overlay.style.display = 'flex';
+
+  // Efek pop pada card yang diklik
+  const card = document.getElementById(`trophy-${trophyId}`);
+  if (card) {
+    card.classList.add('popped');
+    setTimeout(() => card.classList.remove('popped'), 300);
+  }
+}
+
+function closeTrophyModal() {
+  const overlay = document.getElementById('modal-overlay');
+  overlay.style.display = 'none';
+}
+
+// ==========================================================================
+// BABAK 6: BUKA MODAL TROFI UTAMA + KONFETI
+// ==========================================================================
+function openMainTrophy() {
+  const overlay = document.getElementById('modal-main-overlay');
+  overlay.style.display = 'flex';
+
+  // Tembakkan konfeti menggunakan canvas-confetti
+  fireConfetti();
+}
+
+function closeMainModal() {
+  const overlay = document.getElementById('modal-main-overlay');
+  overlay.style.display = 'none';
+}
+
+function fireConfetti() {
+  // Pastikan library canvas-confetti sudah dimuat via CDN
+  if (typeof confetti === 'undefined') {
+    console.warn('canvas-confetti belum dimuat. Pastikan CDN sudah ditambahkan di <head>.');
+    return;
+  }
+
+  // Tembakkan dari kiri
+  confetti({
+    particleCount: 80,
+    angle: 60,
+    spread: 55,
+    origin: { x: 0, y: 0.7 },
+    colors: ['#fbbf24', '#fef08a', '#f59e0b', '#fde68a', '#ffffff']
+  });
+
+  // Tembakkan dari kanan
+  confetti({
+    particleCount: 80,
+    angle: 120,
+    spread: 55,
+    origin: { x: 1, y: 0.7 },
+    colors: ['#fbbf24', '#fef08a', '#f59e0b', '#fde68a', '#ffffff']
+  });
+
+  // Tembakkan dari tengah atas setelah delay kecil
+  setTimeout(() => {
+    confetti({
+      particleCount: 60,
+      spread: 100,
+      origin: { x: 0.5, y: 0.4 },
+      colors: ['#fbbf24', '#fef08a', '#f59e0b', '#ffffff', '#ff69b4']
+    });
+  }, 300);
+}
+
+// ==========================================================================
+// FITUR PENUTUP: KLAIM HADIAH
+// ==========================================================================
+function claimRealGift() {
+  // Tutup modal dulu
+  closeMainModal();
+
+  // Tampilkan pesan konfirmasi hadiah
+  alert('🎁 Hadiah nyatamu sudah menunggumu!\nSampai ketemu ya! 💛');
 }
 
 // ==========================================================================
@@ -236,5 +392,63 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnUseTicket = document.getElementById('btn-use-ticket');
   if (btnUseTicket) {
     btnUseTicket.addEventListener('click', useTicket);
+  }
+
+  // ===== BABAK 4: Tombol ke Galeri Trofi =====
+  const btnToGallery = document.getElementById('btn-to-gallery');
+  if (btnToGallery) {
+    btnToGallery.addEventListener('click', transitionToGallery);
+  }
+
+  // ===== BABAK 5: Klik 3 Trofi Mini =====
+  [1, 2, 3].forEach((id) => {
+    const card = document.getElementById(`trophy-${id}`);
+    if (card) {
+      card.addEventListener('click', () => openTrophyModal(id));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openTrophyModal(id);
+        }
+      });
+    }
+  });
+
+  // ===== BABAK 5: Tutup Modal Mini =====
+  const modalClose = document.getElementById('modal-close');
+  if (modalClose) modalClose.addEventListener('click', closeTrophyModal);
+  const modalOverlay = document.getElementById('modal-overlay');
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeTrophyModal();
+    });
+  }
+
+  // ===== BABAK 6: Trofi Utama =====
+  const trophyMain = document.getElementById('trophy-main');
+  if (trophyMain) {
+    trophyMain.addEventListener('click', openMainTrophy);
+    trophyMain.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openMainTrophy();
+      }
+    });
+  }
+
+  // ===== BABAK 6: Tutup Modal Utama =====
+  const modalMainClose = document.getElementById('modal-main-close');
+  if (modalMainClose) modalMainClose.addEventListener('click', closeMainModal);
+  const modalMainOverlay = document.getElementById('modal-main-overlay');
+  if (modalMainOverlay) {
+    modalMainOverlay.addEventListener('click', (e) => {
+      if (e.target === modalMainOverlay) closeMainModal();
+    });
+  }
+
+  // ===== FITUR PENUTUP: Klaim Hadiah =====
+  const btnClaimGift = document.getElementById('btn-claim-gift');
+  if (btnClaimGift) {
+    btnClaimGift.addEventListener('click', claimRealGift);
   }
 });
